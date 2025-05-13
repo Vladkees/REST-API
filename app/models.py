@@ -1,10 +1,12 @@
-from sqlalchemy import Column, Integer, String
-from app.database import Base
+from flask_sqlalchemy import SQLAlchemy
 
-class Book(Base):
-    __tablename__ = "books"
+db = SQLAlchemy()
 
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, nullable=False)
-    author = Column(String, nullable=False)
-    year = Column(Integer)
+class Book(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    author = db.Column(db.String(100), nullable=False)
+    year = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return f'<Book {self.title}>'

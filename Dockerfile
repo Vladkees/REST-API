@@ -1,11 +1,13 @@
+# Dockerfile
 FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY requirements.txt .
+# Копіюємо залежності
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 
-RUN pip install --no-cache-dir -r requirements.txt
-
+# Копіюємо весь код
 COPY . .
 
 CMD ["python", "run.py"]

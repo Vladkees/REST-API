@@ -1,23 +1,25 @@
-version: "3.9"
+version: '3.8'
+
 services:
   db:
-    image: postgres
+    image: postgres:13
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: library
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
   api:
     build: .
+    environment:
+      - DATABASE_URL=postgresql://user:password@db/library
+    ports:
+      - "5000:5000"
     depends_on:
       - db
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
 
 volumes:
-  pgdata:
+  postgres_data:

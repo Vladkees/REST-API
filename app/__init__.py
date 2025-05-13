@@ -1,9 +1,15 @@
-# app/__init__.py
-
-from fastapi import FastAPI
-from .routers import books  # Тут можеш імпортувати свої роутери
+from flask import Flask
+from app.models import db
+from app.routes import get_books
 
 def create_app():
-    app = FastAPI()
-    app.include_router(books.router)  # Підключаємо маршрути для книги
+    app = Flask(__name__)
+    app.config.from_object('app.config.Config')
+
+    # Ініціалізуємо SQLAlchemy
+    db.init_app(app)
+
+    # Роут для отримання книг
+    app.add_url_rule('/books', 'get_books', get_books)
+
     return app
