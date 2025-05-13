@@ -1,15 +1,13 @@
 from flask import Flask
+from app.config import Config
 from app.models import db
-from app.routes import get_books
+from app.routes import bp
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('app.config.Config')
+    app.config.from_object(Config)
 
-    # Ініціалізуємо SQLAlchemy
     db.init_app(app)
-
-    # Роут для отримання книг
-    app.add_url_rule('/books', 'get_books', get_books)
+    app.register_blueprint(bp)
 
     return app
