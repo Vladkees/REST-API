@@ -9,7 +9,8 @@ def get_books():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
     
-    books = Book.query.paginate(page, per_page, False)
+    books = Book.query.paginate(page, per_page, error_out=False)
+    
     return jsonify({
         'books': [{
             'id': book.id,
@@ -20,7 +21,6 @@ def get_books():
         'pages': books.pages,
         'current_page': books.page
     })
-
 # GET a single book by ID
 @bp.route('/books/<int:id>', methods=['GET'])
 def get_book(id):
