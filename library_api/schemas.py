@@ -1,7 +1,12 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
-class Book(BaseModel):
+class BookCreate(BaseModel):
+    title: str
+    author: str
+    year: int
+
+class Book(BookCreate):
     id: int
-    title: str = Field(..., min_length=1)
-    author: str = Field(..., min_length=1)
-    year: int = Field(..., ge=0)
+
+    class Config:
+        orm_mode = True
