@@ -1,5 +1,3 @@
-
-from flask import Flask
 from .models import db
 from .routes import bp
 from .config import Config
