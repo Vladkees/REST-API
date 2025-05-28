@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from .models import Book
-from .crud import create_book, get_book, get_all_books, delete_book
+from app.crud import create_book, get_book, get_all_books, delete_book
+
 
 app = FastAPI()
 

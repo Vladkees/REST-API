@@ -1,5 +1,6 @@
-from .models import Book
 from app.db import collection
+from app.models import Book
+
 from pydantic_mongo import PydanticObjectId
 
 async def create_book(book: Book):
