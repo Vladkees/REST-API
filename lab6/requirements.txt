@@ -5,4 +5,6 @@ pydantic
 pydantic-mongo
 flask
 flask-restful
-flasgger
+flask-apispec
+flask-sqlalchemy
+marshmallow
